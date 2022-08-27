@@ -1,0 +1,30 @@
+.gameDiv{
+    border: 3px solid;
+    padding: 10px;
+    background-color: lightgrey;
+    text-align: center;
+}
+
+.options{
+    display: flex;
+    justify-content: center;
+    gap : 10px;
+}
+
+button{
+    font-size: 20px;
+}
+
+button:hover{
+    transform: scale(1.2);
+    border : 3px solid yellow;
+    color: brown;
+}
+
+#playerText{
+    color: blue;
+}
+
+#computerText{
+    color: red
+}
