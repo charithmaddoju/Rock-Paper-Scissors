@@ -1,5 +1,24 @@
-let playerWins = 0;
-let computerWins = 0;
+const playerText = document.querySelector('#playerText');
+const computerText = document.querySelector('#computerText');
+const resultText = document.querySelector('#resultText');
+
+let playerSelection;
+let computerSelection;
+let result;
+
+const buttons = document.querySelectorAll('.button');
+
+buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+        playerSelection = button.textContent;
+        computerSelection = getComputerChoice();
+
+        playerText.textContent = `Player : ${playerSelection}`;
+        computerText.textContent = `Computer : ${computerSelection}`;
+        resultText.textContent = playRound(playerSelection,computerSelection);
+    })
+})
+
 
 function getComputerChoice(){
     let choice = Math.floor(Math.random() * 3);
@@ -14,43 +33,26 @@ function getComputerChoice(){
     }
 }
 
-
-
 function playRound(playerSelection,computerSelection){
 
-    if(playerSelection.toUpperCase() === 'ROCK' && computerSelection === 'SCISSORS'){
-        playerWins += 1;
-        return `YOU WON ! ROCK BEATS SCISSORS`;
+    if(playerSelection === computerSelection){
+        return 'Draw!';
     }
 
-    else if(playerSelection.toUpperCase() === 'PAPER' && computerSelection === 'ROCK'){
-        playerWins += 1;
-        return `YOU WON ! PAPER BEATS ROCK`
+    else if(computerSelection === 'ROCK'){
+        
+        return (playerSelection === 'PAPER') ? "You Win!" : "You Lose!";
     }
 
-    else if(playerSelection.toUpperCase() === 'SCISSORS' && computerSelection === 'PAPER'){
-        playerWins += 1;
-        return `YOU WON ! SCISSORS BEATS PAPER`;
+    else if(computerSelection === 'PAPER'){
+        
+        return (playerSelection === 'SCISSORS') ? "You Win!" : "You Lose!";
     }
-    else if(playerSelection.toUpperCase() === computerSelection){
-        return `ITS A DRAW`;
-    }
-    else{
-        computerWins += 1;
-        return `COMPUTER WINS ! ${computerSelection} beats ${playerSelection.toUpperCase()}`;
+    
+    else if(computerSelection === 'SCISSORS'){
+
+        return (playerSelection === 'ROCK') ? "You Win!" : "You Lose!";
     }
 }
 
-// let playerSelection = window.prompt('ENTER YOUR CHOICE ! ROCK/PAPER/SCISSORS :');
-let computerSelection = getComputerChoice();
 
-
-function game(){
-    for(let i = 0; i<5 ; i++){
-        let message = window.prompt("ROCK // PAPER // SCISSORS :?");
-        alert(playRound(message.toUpperCase(),computerSelection));
-    }
-    alert(`PlayerWins ${playerWins}, ComputerWins ${computerWins}`);
-}
-
-game();
